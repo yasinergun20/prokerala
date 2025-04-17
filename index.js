@@ -4,8 +4,8 @@ const app = express();
 app.use(express.json());
 
 // 🔐 Kendi Prokerala API bilgilerin
-const clientId = "BURAYA_CLIENT_ID_YAPIŞTIR";
-const clientSecret = "BURAYA_CLIENT_SECRET_YAPIŞTIR";
+const clientId = "9e6d5d64-59ed-445c-bf95-f2896343a1ef";
+const clientSecret = "1ecRB9EIVs01sIcfu59WwJaGboIVO8WtgQxYDpIM";
 
 // ⛽ Önce Access Token al
 async function getAccessToken() {

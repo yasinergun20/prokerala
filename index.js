@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(express.json());
 
-const apiKey = "https://prokerala.onrender.com/prokerala"; // .env kullanmıyorsan
+const apiKey = "1ecRB9EIVs01sIcfu59WwJaGboIVO8WtgQxYDpIM"; // .env kullanmıyorsan
 
 // 🌙 AY BURCU
 app.post("/prokerala", async (req, res) => {

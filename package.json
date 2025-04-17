@@ -1,16 +1,11 @@
 {
   "name": "prokerala-backend",
   "version": "1.0.0",
-  "description": "Prokerala astroloji API backend (SDK ile)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "@prokerala/astrology": "^2.2.0",
     "express": "^4.18.2"
-  },
-  "engines": {
-    "node": ">=14"
   }
 }

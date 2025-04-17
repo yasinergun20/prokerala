@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(express.json());
 
-const apiKey = "BURAYA_API_KEYİNİ_YAPIŞTIR"; // .env yerine doğrudan burada
+const apiKey = "BURAYA_API_KEYİN"; // .env kullanmıyorsan
 
 app.post("/ayburcu", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
@@ -27,4 +27,4 @@ app.post("/ayburcu", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Sunucu aktif:", PORT));
+app.listen(PORT, () => console.log("Sunucu çalışıyor:", PORT));

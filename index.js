@@ -1,54 +1,40 @@
 const express = require("express");
-const { Astrology } = require("./astro-sdk"); // ← klasör adın neyse burası
-
+const { Astrology } = require("./astro-sdk"); // SDK'yi çağırıyoruz
 const app = express();
+
 app.use(express.json());
 
-// 🔐 Prokerala giriş bilgilerin
+// 🔐 Prokerala kimlik bilgilerin
 const astrology = new Astrology({
-  clientId: "BURAYA_CLIENT_ID",
-  clientSecret: "BURAYA_CLIENT_SECRET"
+  clientId: "SENIN_CLIENT_ID",
+  clientSecret: "SENIN_CLIENT_SECRET"
 });
 
 app.post("/dogumharitasi", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
+  const coordinates = { latitude, longitude };
 
   try {
-    const moonSign = await astrology.getMoonSign({
-      date,
-      time,
-      coordinates: { latitude, longitude },
-    });
+    console.log("📥 İstek alındı:", date, time, latitude, longitude);
 
-    const ascendant = await astrology.getAscendant({
-      date,
-      time,
-      coordinates: { latitude, longitude },
-    });
-
-    const planets = await astrology.getPlanetPositions({
-      date,
-      time,
-      coordinates: { latitude, longitude },
-    });
-
-    const houses = await astrology.getHousePositions({
-      date,
-      time,
-      coordinates: { latitude, longitude },
-    });
+    const [moon, asc, planets, houses] = await Promise.all([
+      astrology.getMoonSign({ date, time, coordinates }),
+      astrology.getAscendant({ date, time, coordinates }),
+      astrology.getPlanetPositions({ date, time, coordinates }),
+      astrology.getHousePositions({ date, time, coordinates })
+    ]);
 
     res.json({
-      "moon-sign": moonSign.data,
-      "ascendant": ascendant.data,
+      "moon-sign": moon.data,
+      "ascendant": asc.data,
       "planet-positions": planets.data,
-      "house-positions": houses.data,
+      "house-positions": houses.data
     });
   } catch (err) {
-    console.error("❌ HATA:", err.message);
+    console.error("🚨 Hata:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Sunucu hazır: ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Sunucu çalışıyor: ${PORT}`));

@@ -2,8 +2,8 @@ const fetch = require("node-fetch");
 
 class Astrology {
   constructor({ clientId, clientSecret }) {
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
+    this.clientId = '9e6d5d64-59ed-445c-bf95-f2896343a1ef';
+    this.clientSecret = '1ecRB9EIVs01sIcfu59WwJaGboIVO8WtgQxYDpIM';
     this.token = null;
   }
 

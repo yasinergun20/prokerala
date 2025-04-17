@@ -48,7 +48,7 @@ app.post("/dogumharitasi", async (req, res) => {
     const token = await getAccessToken();
 
     for (const endpoint of endpoints) {
-const url = `https://api.prokerala.com/api/v4/astrology/${endpoint}`; ✅
+const url = `https://api.prokerala.com/api/v4/astrology/${endpoint}`; 
 
 
       console.log("🔗 İstek:", url);

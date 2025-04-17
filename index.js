@@ -4,10 +4,10 @@ const fetch = require("node-fetch");
 const app = express();
 app.use(express.json());
 
-const apiKey = "BURAYA_PROKERALA_API_KEYİNİ_YAPIŞTIR"; // .env kullanmıyorsan
+const apiKey = "https://prokerala.onrender.com/prokerala"; // .env kullanmıyorsan
 
 // 🌙 AY BURCU
-app.post("/ayburcu", async (req, res) => {
+app.post("/prokerala", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
 
   const response = await fetch("https://api.prokerala.com/v2/astrology/moon-sign", {

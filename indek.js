@@ -1,9 +1,10 @@
 const express = require("express");
 const fetch = require("node-fetch");
-require("dotenv").config();
 
 const app = express();
 app.use(express.json());
+
+const apiKey = "BURAYA_API_KEYİNİ_YAPIŞTIR"; // .env yerine doğrudan burada
 
 app.post("/ayburcu", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
@@ -12,7 +13,7 @@ app.post("/ayburcu", async (req, res) => {
     const response = await fetch("https://api.prokerala.com/v2/astrology/moon-sign", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.PROKERALA_API_KEY}`,
+        "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ date, time, latitude, longitude })
@@ -21,9 +22,9 @@ app.post("/ayburcu", async (req, res) => {
     const data = await response.json();
     res.json(data);
   } catch (err) {
-    res.status(500).json({ error: "Hesaplama başarısız", detay: err.message });
+    res.status(500).json({ error: "API çağrısı başarısız", detay: err.message });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Sunucu ayakta:", PORT));
+app.listen(PORT, () => console.log("Sunucu aktif:", PORT));

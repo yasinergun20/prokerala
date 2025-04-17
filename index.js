@@ -1,20 +1,17 @@
 const express = require("express");
-const { Astrology } = require("@prokerala/astrology");
+const { Astrology } = require("./astro-sdk"); // ← klasör adın neyse burası
 
 const app = express();
 app.use(express.json());
 
-// 🚨 BURAYA kendi Prokerala bilgilerini yaz
+// 🔐 Prokerala giriş bilgilerin
 const astrology = new Astrology({
-  clientId: "9e6d5d64-59ed-445c-bf95-f2896343a1efZ",
-  clientSecret: "1ecRB9EIVs01sIcfu59WwJaGboIVO8WtgQxYDpIM",
+  clientId: "BURAYA_CLIENT_ID",
+  clientSecret: "BURAYA_CLIENT_SECRET"
 });
 
-// 🌌 Doğum Haritası
 app.post("/dogumharitasi", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
-
-  console.log("📥 İstek alındı:", date, time, latitude, longitude);
 
   try {
     const moonSign = await astrology.getMoonSign({
@@ -48,12 +45,10 @@ app.post("/dogumharitasi", async (req, res) => {
       "house-positions": houses.data,
     });
   } catch (err) {
-    console.error("❌ API HATASI:", err.message);
+    console.error("❌ HATA:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Sunucu çalışıyor: http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Sunucu hazır: ${PORT}`));

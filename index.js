@@ -6,8 +6,8 @@ app.use(express.json());
 
 // 🔐 Prokerala kimlik bilgilerin
 const astrology = new Astrology({
-  clientId: "SENIN_CLIENT_ID",
-  clientSecret: "SENIN_CLIENT_SECRET"
+  clientId: "9e6d5d64-59ed-445c-bf95-f2896343a1ef",
+  clientSecret: "1ecRB9EIVs01sIcfu59WwJaGboIVO8WtgQxYDpIM"
 });
 
 app.post("/dogumharitasi", async (req, res) => {

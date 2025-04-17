@@ -24,7 +24,7 @@ app.post("/dogumharitasi", async (req, res) => {
 
   try {
     for (const endpoint of endpoints) {
-      const response = await fetch(`https://api.prokerala.com/v2/astrology/${endpoint}`, {
+      const response = await fetch(`https://api.prokerala.com/v3/astrology/${endpoint}`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${apiKey}`,
@@ -55,7 +55,7 @@ app.post("/ayburcu", async (req, res) => {
   const { date, time, latitude, longitude } = req.body;
 
   try {
-    const response = await fetch("https://api.prokerala.com/v2/astrology/moon-sign", {
+    const response = await fetch("https://api.prokerala.com/v3/astrology/moon-sign", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${apiKey}`,
